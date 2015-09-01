@@ -19,6 +19,7 @@ class CreateAssessmentsTable extends Migration
             $table->timestamps();
         });
     }
+    //comment
 
     /**
      * Reverse the migrations.
