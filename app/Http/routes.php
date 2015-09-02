@@ -11,34 +11,11 @@
 |
 */
 
-get('/',function(){
-  return "<center><h1>sign in please</h1></center>";
-});
-
-post('/',function(){
-  //post form data
-});
-
-get('signup', function () {
-    return "<center><h1>Sign Up Page is here</h1></center>";
-});
-
-post('signup',function(){
-  //post form data
-});
-
-get('{username}',function($username){
-  return "<center><h1>You're logged in as ".$username."</h1></center";
-});
-
-get('{username}/questions',function($username){
-  return "<center><h1>Questions page</h1></center>";
-});
-
-get('{username}/questions/{level}',function($username,$level){
-  return Redirect($username.'/questions');
-});
-
-get('{username}/questions/{level}/{qid}',function($username,$level,$qid){
-  return "<center><h1>This is level ".$level.", question ".$qid.".</h1></center>";
-});
+get('/','signInCtrl@index');
+post('/','signInCtrl@store');
+get('signup', 'signUpCtrl@index');
+post('signup','signUpCtrl@store');
+get('{username}','usernameCtrl@show');
+get('{username}/questions',function($username){ return view('questions');});
+get('{username}/questions/{level}',function($username,$level){return Redirect($username.'/questions');});
+get('{username}/questions/{level}/{qid}','questionCtrl@show');
