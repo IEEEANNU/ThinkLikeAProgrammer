@@ -16,7 +16,7 @@ class signInCtrl extends Controller
      */
     public function index()
     {
-        return "<center><h1>sign in please</h1></center>";
+        return view('signin');
     }
 
     /**

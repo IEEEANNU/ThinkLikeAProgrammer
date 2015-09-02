@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class usernameCtrl extends Controller
+class profileCtrl extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class usernameCtrl extends Controller
      */
     public function index()
     {
-//
+      return view('profile');
     }
 
     /**
@@ -48,7 +48,7 @@ class usernameCtrl extends Controller
      */
     public function show($username)
     {
-      return "<center><h1>You're logged in as ".$username."</h1></center";
+      //
     }
 
     /**

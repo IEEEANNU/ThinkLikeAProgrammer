@@ -16,7 +16,7 @@ class signUpCtrl extends Controller
      */
     public function index()
     {
-      return "<center><h1>Sign Up Page is here</h1></center>";
+      return view('signup');
     }
 
     /**
@@ -37,7 +37,13 @@ class signUpCtrl extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //post form data
+      $username = Input::get('username');
+      $email = Input::get('email');
+      $password = Input::get('password');
+      $age = Input::get('age');
+      //validate and save to db
+      return Redirect('/');
     }
 
     /**
