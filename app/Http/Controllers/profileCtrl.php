@@ -16,7 +16,14 @@ class profileCtrl extends Controller
      */
     public function index()
     {
-      return view('profile');
+      $leaders = ['Ahmad','Tamer','Mahmood'];
+      $questions = array(
+        array(1,1,'square','simple square',5,'No'),
+        array(2,1,'circle','circles',5,'No'),
+        array(3,2,'polygons','polygons',10,'No'),
+        array(4,2,'complex','complex',10,'No')
+      );
+      return view('profile')->withLeaders($leaders)->withQuestions($questions);
     }
 
     /**

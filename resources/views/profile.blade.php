@@ -38,14 +38,16 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-					    	<tr>
-					    		<td>1</td>
-					    		<td>1</td>
-					    		<td>Square</td>
-					    		<td>Simple square</td>
-					    		<td>5</td>
-					    		<td>No</td>
-					    	</tr>
+								@foreach($questions as $k=>$v)
+									<tr>
+										<td>{{$v[0]}}</td>
+										<td>{{$v[1]}}</td>
+										<td>{{$v[2]}}</td>
+										<td>{{$v[3]}}</td>
+										<td>{{$v[4]}}</td>
+										<td>{{$v[5]}}</td>
+									</tr>
+								@endforeach
 					    </tbody>
 					  </table>
 				</div>
@@ -56,44 +58,28 @@
 					<hr>
 				</div>
 				<div class="row">
-					<div class="" style="height:25px;">
-						1.<span class="nameIsHere"><!--?php echo $topPeople[2]; ?--></span>
-						<div class="progress">
-						  	<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="width:0">
-								<span class="valueReached" id="topscore1" data-width=""></span>
-                <!-- ? php echo htmlspecialchars($topScore[sizeof($topScore)-1]*100/$topScore[sizeof($topScore)-1]); ?> -->
-                <!-- ?php echo $topScore[sizeof($topScore)-1] ?-->
+
+					@foreach($leaders as $k=>$v)
+						<div class="" style="height:25px;">
+							{{$k+1}}.<span>{{$v}}</span>
+							<div class="progress">
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="width:45%">
+									<span id="topscore{{$k+1}}" data-width="45">45</span>
+									</div>
 							</div>
 						</div>
-					</div>
-					<br>
-					<div class="" style="height:25px;">
-						2.<span class="nameIsHere"></span>
-						<div class="progress">
-						  	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"aria-valuemin="0" aria-valuemax="100" style="width:0px">
-								<span class="valueReached" id="topscore2" data-width=""></span>
-							</div>
-						</div>
-					</div>
-					<br>
-					<div class="" style="height:25px;">
-						3.<span class="nameIsHere"></span>
-						<div class="progress">
-						    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="1000" style="width:0px">
-								<span class="valueReached" id="topscore3" data-width=""></span>
-							</div>
-						</div>
-					</div>
+						<br>
+					@endforeach
 
 					<div class=""><hr></div>
 
 					<div class="row">
-						<center><label style="font-size:17px; color:#19a2e4;">You are #<span class="addHere"></span></label></center>
+						<center><label style="font-size:17px; color:#19a2e4;">You are #<span>6</span></label></center>
 					</div>
 					<div class="" style="height:25px;">
 						<div class="progress">
-							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:0px">
-								<span class="valueReached" data-width=""></span>
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:10%">
+								<span data-width="10">10</span>
 						  	</div>
 						</div>
 					</div>
