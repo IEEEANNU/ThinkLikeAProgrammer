@@ -16,6 +16,8 @@ class signInCtrl extends Controller
      */
     public function index()
     {
+      //if session is up.. redirect to profile-- localhost/username
+      //else
         return view('signin');
     }
 

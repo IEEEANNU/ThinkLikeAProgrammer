@@ -48,7 +48,7 @@ class questionCtrl extends Controller
      */
     public function show($username,$level,$qid)
     {
-      return "<center><h1>This is level ".$level.", question ".$qid.".</h1></center>";
+      return view('question')->with('id',$qid);
     }
 
     /**

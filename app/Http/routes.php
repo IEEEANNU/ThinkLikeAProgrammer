@@ -16,6 +16,5 @@ post('/','signInCtrl@store');
 get('signup', 'signUpCtrl@index');
 post('signup','signUpCtrl@store');
 get('{username}','profileCtrl@index');
-// get('{username}/profile',function($username){ return view('questions');});
-// get('{username}/questions/{level}',function($username,$level){return Redirect($username.'/questions');});
-// get('{username}/questions/{level}/{qid}','questionCtrl@show');
+get('{username}/{level}',function($username,$level){return Redirect($username);});
+get('{username}/{level}/{qid}','questionCtrl@show');
