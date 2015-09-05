@@ -8,7 +8,7 @@
 	<center>
 		<img src="{{asset('images/TLAP.jpg')}}" width="350px">
 
-    @yield('content');
+    @yield('content')
 
   <br>
   <br>

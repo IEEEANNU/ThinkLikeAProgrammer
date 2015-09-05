@@ -16,7 +16,7 @@ class profileCtrl extends Controller
      */
     public function index()
     {
-      $leaders = ['Ahmad','Tamer','Mahmood'];
+      $leaders = ['AhmadH','TamerHN','MahmoodKS'];
       $questions = array(
         array(1,1,'square','simple square',5,'No'),
         array(2,1,'circle','circles',5,'No'),
