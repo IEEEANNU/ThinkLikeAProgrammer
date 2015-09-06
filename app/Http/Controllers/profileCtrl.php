@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class profileCtrl extends Controller
 {
@@ -16,7 +17,34 @@ class profileCtrl extends Controller
      */
     public function index()
     {
-      $leaders = ['AhmadH','TamerHN','MahmoodKS'];
+      $leaders = array();
+      $users = DB::table('users')->get();
+      $leaders[0] = $users[0];
+      $leaders[1] = $users[1];
+      $leaders[2] = $users[2];
+      foreach ($users as $user) {
+        if($user->total_score > $leaders[0]->total_score)
+        {
+          $leaders[0] = $user;
+        }
+        else if($user->total_score > $leaders[1]->total_score)
+        {
+          $leaders[1] = $user;
+        }
+        else if($user->total_score > $leaders[2]->total_score)
+        {
+          $leaders[2] = $user;
+        }
+      }
+
+        print_r($leaders);
+
+      // foreach ($users as $user) {
+      //   $leaders[$user->id] =
+      //     array($user->name,$user->total_score);
+      // }
+
+      //$leaders = ['AhmadH','TamerHN','MahmoodKS'];
       $questions = array(
         array(1,1,'square','simple square',5,'No'),
         array(2,1,'circle','circles',5,'No'),
@@ -91,4 +119,5 @@ class profileCtrl extends Controller
     {
         //
     }
+
 }
