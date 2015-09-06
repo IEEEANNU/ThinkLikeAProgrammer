@@ -32,20 +32,18 @@
 					        <th>Question#</th>
 					        <th>Level#</th>
 					        <th>Name</th>
-					        <th>Description</th>
 					        <th>Mark</th>
 					        <th>Solved?</th>
 					      </tr>
 					    </thead>
 					    <tbody>
-								@foreach($questions as $k=>$v)
+								@foreach($questions as $question)
 									<tr>
-										<td>{{$v[0]}}</td>
-										<td>{{$v[1]}}</td>
-										<td>{{$v[2]}}</td>
-										<td>{{$v[3]}}</td>
-										<td>{{$v[4]}}</td>
-										<td>{{$v[5]}}</td>
+										<td>{{$question->id}}</td>
+										<td>{{$question->level}}</td>
+										<td>{{$question->name}}</td>
+										<td>{{$question->value}}</td>
+										<td>No</td>
 									</tr>
 								@endforeach
 					    </tbody>
@@ -59,12 +57,12 @@
 				</div>
 				<div class="row">
 
-					@foreach($leaders as $k=>$v)
+					@foreach($leaders as $leader)
 						<div class="" style="height:25px;">
-							{{$k+1}}.<span>{{$v}}</span>
+							{{$leader->id}}.<span>{{$leader->name}}</span>
 							<div class="progress">
-									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="width:45%">
-									<span id="topscore{{$k+1}}" data-width="45">45</span>
+									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="width:{{$leader->total_score}}%">
+									<span id="topscore{{$leader->id}}">{{$leader->total_score}}</span>
 									</div>
 							</div>
 						</div>

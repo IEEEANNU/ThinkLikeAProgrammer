@@ -37,20 +37,16 @@ class profileCtrl extends Controller
         }
       }
 
-        print_r($leaders);
+        //print_r($leaders);
 
-      // foreach ($users as $user) {
-      //   $leaders[$user->id] =
-      //     array($user->name,$user->total_score);
-      // }
+      $questions = DB::table('questions')->get();
 
-      //$leaders = ['AhmadH','TamerHN','MahmoodKS'];
-      $questions = array(
-        array(1,1,'square','simple square',5,'No'),
-        array(2,1,'circle','circles',5,'No'),
-        array(3,2,'polygons','polygons',10,'No'),
-        array(4,2,'complex','complex',10,'No')
-      );
+      // array(
+      //   array(1,1,'square','simple square',5,'No'),
+      //   array(2,1,'circle','circles',5,'No'),
+      //   array(3,2,'polygons','polygons',10,'No'),
+      //   array(4,2,'complex','complex',10,'No')
+      // );
       return view('profile')->withLeaders($leaders)->withQuestions($questions);
     }
 
