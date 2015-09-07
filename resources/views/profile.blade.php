@@ -33,7 +33,6 @@
 					        <th>Level#</th>
 					        <th>Name</th>
 					        <th>Mark</th>
-					        <th>Solved?</th>
 					      </tr>
 					    </thead>
 					    <tbody>
@@ -43,7 +42,6 @@
 										<td>{{$question->level}}</td>
 										<td>{{$question->name}}</td>
 										<td>{{$question->value}}</td>
-										<td>No</td>
 									</tr>
 								@endforeach
 					    </tbody>
