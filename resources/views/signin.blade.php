@@ -12,7 +12,7 @@
 		  <input type="password" class="form-control" aria-describedby="basic-addon1">
 		</div>
 		<br>
-		<button type="button" class="col-xs-4 col-lg-offset-4 btn btn-info">Sign in</button>
+		<button type="submit" class="col-xs-4 col-lg-offset-4 btn btn-info">Sign in</button>
 		<br><br><br>
 		<p class="col-xs-4 col-lg-offset-4">Don't have account? then
 			<a style="cursor:pointer"> SignUp</a>!</p>

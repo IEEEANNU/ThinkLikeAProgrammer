@@ -2,6 +2,7 @@
 
     @section('content')
 
+		<h3 style="color:red">{{$messege}}</h1>
 		<form action="signup/" method="POST">
 			{!! csrf_field() !!}
 	    <div class="input-group col-xs-4">

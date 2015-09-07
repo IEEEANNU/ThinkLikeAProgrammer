@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
@@ -17,7 +16,7 @@ class signUpCtrl extends Controller
      */
     public function index()
     {
-      return view('signup');
+      return view('signup')->withMessege('');
     }
 
     /**
@@ -38,21 +37,17 @@ class signUpCtrl extends Controller
      */
     public function store(Request $request)
     {
-      //post form data
       $username = $request->input('username');
-      echo $username;
       $email = $request->input('email');
-      echo $email;
       $password = $request->input('password');
       $confirmpassword = $request->input('confirmpassword');
-      // if($password!=$confirmpassword)
-      // {
-      //   echo '<script>alert("password is not confirmed correcly")</script>';
-      //   return;
-      // }
-      //validate and save to db
+      
+      else if($password!=$confirmpassword)
+      {
+        return "<script type='text/javascript'>alert('submit fail! Passworded is not confirmed correctly!')</script>".redirect('signup');
+      }
       DB::table('users')->insert(['name'=>$username,'email'=>$email,'password'=>$password]);
-      return Redirect('/');
+      return "<script type='text/javascript'>alert('submit successful! Please sign in!')</script>".redirect('/');
     }
 
     /**
