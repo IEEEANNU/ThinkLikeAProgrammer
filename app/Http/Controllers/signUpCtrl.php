@@ -42,7 +42,7 @@ class signUpCtrl extends Controller
       $password = $request->input('password');
       $confirmpassword = $request->input('confirmpassword');
 
-      else if($password!=$confirmpassword)
+      if($password!=$confirmpassword)
       {
         return "<script type='text/javascript'>alert('submit fail! Passworded is not confirmed correctly!')</script>".redirect('signup');
       }
