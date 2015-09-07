@@ -54,10 +54,10 @@
 					<hr>
 				</div>
 				<div class="row">
-
+					<?php $i = 1 ?>
 					@foreach($leaders as $leader)
 						<div class="" style="height:25px;">
-							{{$leader->id}}.<span>{{$leader->name}}</span>
+							{{$i++}}.<span>{{$leader->name}}</span>
 							<div class="progress">
 									<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="width:{{$leader->total_score}}%">
 									<span id="topscore{{$leader->id}}">{{$leader->total_score}}</span>

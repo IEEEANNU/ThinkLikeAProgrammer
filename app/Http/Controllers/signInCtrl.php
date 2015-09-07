@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class signInCtrl extends Controller
 {
@@ -39,9 +40,8 @@ class signInCtrl extends Controller
      */
     public function store(Request $request)
     {
-      //post form data
-      $username = Input::get('username');
-      $password = Input::get('password');
+      $username = $request->input('username');
+      $password = $request->input('password');
       //validate first
       return Redirect($username);
     }
