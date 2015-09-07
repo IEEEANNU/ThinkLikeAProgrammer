@@ -1,6 +1,6 @@
-		@extends('embrace');
+		@extends('embrace')
 
-    @section('content');
+    @section('content')
 
 		<form action="signup" method="POST">
 			{!! csrf_field() !!}
