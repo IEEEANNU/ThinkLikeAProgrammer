@@ -39,19 +39,19 @@ class signUpCtrl extends Controller
     public function store(Request $request)
     {
       //post form data
-      $username = Input::get('username');
+      $username = $request->input('username');
       echo $username;
-      $email = Input::get('email');
+      $email = $request->input('email');
       echo $email;
-      $password = Input::get('password');
-      $confirmpassword = Input::get('confirmpassword');
+      $password = $request->input('password');
+      $confirmpassword = $request->input('confirmpassword');
       // if($password!=$confirmpassword)
       // {
       //   echo '<script>alert("password is not confirmed correcly")</script>';
       //   return;
       // }
       //validate and save to db
-      DB::table('users')->insert(['name'=>$username,'email'=>$email,'password'=>$password,'total_score'=>0]);
+      DB::table('users')->insert(['name'=>$username,'email'=>$email,'password'=>$password]);
       return Redirect('/');
     }
 

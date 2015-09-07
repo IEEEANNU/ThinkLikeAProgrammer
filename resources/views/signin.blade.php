@@ -1,6 +1,6 @@
-		@extends('embrace');
+		@extends('embrace')
 
-    @section('content');
+    @section('content')
 
     <div class="input-group col-xs-4">
 		  <span class="input-group-addon" id="basic-addon1" style="width:140px">Username</span>
