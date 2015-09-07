@@ -16,7 +16,7 @@ class signUpCtrl extends Controller
      */
     public function index()
     {
-      return view('signup')->withMessege('');
+      return view('signup');
     }
 
     /**
@@ -41,7 +41,7 @@ class signUpCtrl extends Controller
       $email = $request->input('email');
       $password = $request->input('password');
       $confirmpassword = $request->input('confirmpassword');
-      
+
       else if($password!=$confirmpassword)
       {
         return "<script type='text/javascript'>alert('submit fail! Passworded is not confirmed correctly!')</script>".redirect('signup');
