@@ -11,10 +11,14 @@
 |
 */
 
-get('/','signInCtrl@index');
-post('/','signInCtrl@store');
-get('signup', 'signUpCtrl@index');
-post('signup','signUpCtrl@store');
-get('{username}','profileCtrl@index');
-get('{username}/{level}',function($username,$level){return Redirect($username);});
-get('{username}/{level}/{qid}','questionCtrl@show');
+Route::resource('/','signInCtrl');
+Route::resource('signup','signUpCtrl');
+Route::resource('{username}','profileCtrl');
+//Route::resource('{username}/{qid}','questionCtrl');
+//----------------
+// get('/','signInCtrl@index');
+// post('/','signInCtrl@store');
+// get('signup', 'signUpCtrl@index');
+// post('signup','signUpCtrl@store');
+// get('{username}','profileCtrl@index');
+// get('{username}/{level}/{qid}','questionCtrl@show');

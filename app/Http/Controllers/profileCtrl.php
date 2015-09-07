@@ -49,7 +49,7 @@ class profileCtrl extends Controller
      */
     public function create()
     {
-        //
+        //return 'create a new user';
     }
 
     /**
@@ -60,7 +60,7 @@ class profileCtrl extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return 'store the new user to the db';
     }
 
     /**
@@ -69,9 +69,9 @@ class profileCtrl extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($username)
+    public function show($id)
     {
-      //
+      return 'go inside the $id (sub)';
     }
 
     /**
@@ -82,7 +82,7 @@ class profileCtrl extends Controller
      */
     public function edit($id)
     {
-        //
+        return "you're editing $id (sub)";
     }
 
     /**
@@ -94,7 +94,7 @@ class profileCtrl extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "saving the edited $id";
     }
 
     /**
@@ -105,7 +105,7 @@ class profileCtrl extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "deleting it";
     }
 
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class signUpCtrl extends Controller
 {
@@ -26,7 +27,7 @@ class signUpCtrl extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -39,10 +40,18 @@ class signUpCtrl extends Controller
     {
       //post form data
       $username = Input::get('username');
+      echo $username;
       $email = Input::get('email');
+      echo $email;
       $password = Input::get('password');
-      $age = Input::get('age');
+      $confirmpassword = Input::get('confirmpassword');
+      // if($password!=$confirmpassword)
+      // {
+      //   echo '<script>alert("password is not confirmed correcly")</script>';
+      //   return;
+      // }
       //validate and save to db
+      DB::table('users')->insert(['name'=>$username,'email'=>$email,'password'=>$password,'total_score'=>0]);
       return Redirect('/');
     }
 
