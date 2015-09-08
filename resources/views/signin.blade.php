@@ -17,12 +17,8 @@
 			<button type="submit" class="col-xs-4 col-lg-offset-4 btn btn-info">Sign in</button>
 		</form>
 		<br><br><br>
-
-		<form action="signup" method="GET">
-			{!! csrf_field() !!}
-			<p class="col-xs-4 col-lg-offset-4">Don't have account? then
-			<button class="btn btn-warning" type="submit" style="cursor:pointer; Display: inline-block"> SignUp</button>!</p>
-		</form>
+		<p class="col-xs-4 col-lg-offset-4">Don't have account? then
+		<a href="{{route('signup.index')}}">sign up</a>
     <br/>
     <br>
     <br>
