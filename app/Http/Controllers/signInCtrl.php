@@ -43,6 +43,7 @@ class signInCtrl extends Controller
       $username = $request->input('username');
       $password = $request->input('password');
       //validate first
+      session()->push('userSession',$username);
       return Redirect($username);
     }
 

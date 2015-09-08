@@ -4,6 +4,21 @@
 
 		<form action="signup/" method="POST">
 			{!! csrf_field() !!}
+			<table class="table" style="width:50%; margin:0 auto">
+				@if(count($errors)>0)
+					<tr>
+						<td colspan="2">
+							<div class="alert alert-danger">
+									<ul>
+										@@foreach($$errors->all as $error)
+											<li>{{$error}}</li>
+										@endforeach
+									</ul>
+							</div>
+						</td>
+					</tr>
+				@endif
+			</table>
 	    <div class="input-group col-xs-4">
 			  <span class="input-group-addon" id="basic-addon1" style="width:140px">Username</span>
 			  <input name="username" type="text" class="form-control" placeholder="I.e: TamerHN" aria-describedby="basic-addon1">

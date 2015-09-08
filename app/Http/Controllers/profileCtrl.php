@@ -10,6 +10,9 @@ use DB;
 
 class profileCtrl extends Controller
 {
+  public function __construct(){
+    $this->middleware('auth');
+  }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +20,9 @@ class profileCtrl extends Controller
      */
     public function index()
     {
+      // $a = [];
+      // $a = session()->pull('userSession');
+
       $leaders = array();
       $users = DB::table('users')->get();
       $leaders[0] = $users[0];

@@ -11,13 +11,19 @@
 				<div  style="margin-top:20px">
 					<a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/SBLogo.png')}}" width="100px" class=""></a>
 				</div>
-				<div  style="margin-top:20px">
+				<div style="margin-top:20px">
 					<a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/cs.jpg')}}" width="100px"></a>
 				</div>
 			</div>
 			<div class="col-lg-2 col-lg-offset-2">
 				<img src="{{asset('images/TLAP.jpg')}}" width="350px">
 			</div>
+
+			@if(Auth::check())
+				<div class="col-lg-offset-2">
+					Welcome: {{ Auth::user()->name }}
+				</div>
+			@endif
 
 		</div>
 		<hr>
@@ -68,7 +74,11 @@
 					@endforeach
 
 					<div class=""><hr></div>
-
+@if(Session::has('userSession'))
+<p>hello</p>
+<?php $a = []; $a = session()->pull('userSession'); ?>
+{{ $a[0] }}
+@endif
 					<div class="row">
 						<center><label style="font-size:17px; color:#19a2e4;">You are #<span>6</span></label></center>
 					</div>

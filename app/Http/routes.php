@@ -11,9 +11,13 @@
 |
 */
 
-Route::resource('/','signInCtrl');
-Route::resource('signup','signUpCtrl');
-Route::resource('{username}','profileCtrl');
+get('/','Auth\AuthController@getLogin');
+post('/','Auth\AuthController@postLogin');
+get('signup','Auth\AuthController@getRegister');
+post('signup','Auth\AuthController@postRegister');
+Route::resource('profile','profileCtrl');
+//get('/profile',['middleware'=>'auth','uses','profileCtrl@index'])
+//---------------
 //Route::resource('{username}/{qid}','questionCtrl');
 //----------------
 // get('/','signInCtrl@index');
