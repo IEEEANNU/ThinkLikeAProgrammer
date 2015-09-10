@@ -2,7 +2,7 @@
 
     @section('content')
 
-		<form action="/" method="POST">
+		<form action="{{url('login')}}" method="POST">
 			{!! csrf_field() !!}
 			<table class="table" style="width:50%; margin:0 auto">
 				@if(count($errors)>0)
@@ -10,7 +10,7 @@
 						<td colspan="2">
 							<div class="alert alert-danger">
 									<ul>
-										@@foreach($$errors->all as $error)
+										@foreach($errors->all() as $error)
 											<li>{{$error}}</li>
 										@endforeach
 									</ul>
@@ -20,8 +20,8 @@
 				@endif
 			</table>
 	    <div class="input-group col-xs-4">
-			  <span class="input-group-addon" id="basic-addon1" style="width:140px">Username</span>
-			  <input name="username" type="text" class="form-control" placeholder="I.e: TamerHN" aria-describedby="basic-addon1">
+			  <span class="input-group-addon" id="basic-addon1" style="width:140px">Email</span>
+			  <input name="email" type="text" class="form-control" placeholder="e.g.: ex@example.com" aria-describedby="basic-addon1" value="{{old('email')}}">
 			</div>
 			<br>
 			<div class="input-group col-xs-4">
@@ -33,7 +33,7 @@
 		</form>
 		<br><br><br>
 		<p class="col-xs-4 col-lg-offset-4">Don't have account? then
-		<a href="{{route('signup.index')}}">sign up</a>
+		<a href="{{url('signup')}}">sign up</a>
     <br/>
     <br>
     <br>

@@ -11,11 +11,12 @@
 |
 */
 
-get('/','Auth\AuthController@getLogin');
-post('/','Auth\AuthController@postLogin');
-get('signup','Auth\AuthController@getRegister');
-post('signup','Auth\AuthController@postRegister');
-Route::resource('profile','profileCtrl');
+Route::get('login','Auth\AuthController@getLogin');
+Route::post('login','Auth\AuthController@postLogin');
+Route::get('signup','Auth\AuthController@getRegister');
+Route::post('signup','Auth\AuthController@postRegister');
+Route::get('logout', 'Auth\AuthController@getLogout');
+//Route::resource('profile','profileCtrl');
 //get('/profile',['middleware'=>'auth','uses','profileCtrl@index'])
 //---------------
 //Route::resource('{username}/{qid}','questionCtrl');
