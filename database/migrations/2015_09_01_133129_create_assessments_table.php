@@ -15,7 +15,9 @@ class CreateAssessmentsTable extends Migration
         Schema::create('assessments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('submission_id')->unsigned();
-            $table->boolean('accepted');
+            $table->integer('grader_id')->unsigned(); // users table
+            $table->double('grade', 15, 8); // a fraction telling how correct the question was.
+            $table->double('final_grade', 15, 8); // after calculation
             $table->timestamps();
         });
     }

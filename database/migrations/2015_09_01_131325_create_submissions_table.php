@@ -13,12 +13,12 @@ class CreateSubmissionsTable extends Migration
     public function up()
     {
         Schema::create('submissions', function (Blueprint $table) {
-            $table->increments('id');//SubID
+            $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('question_id')->unsigned();
-            $table->string('link');
-            $table->boolean('hint_used');
-            $table->boolean('assessed');
+            $table->text('blocks');
+            $table->text('image');
+            $table->boolean('hint_used')->default(false);
             $table->timestamps();
         });
     }

@@ -14,12 +14,15 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('level_id')->unsigned();
             $table->string('name');
-            $table->integer('level');
-            $table->integer('value');
+            $table->string('link');
+            $table->text('blocks');
             $table->string('image');
-            $table->text('hint');
-            $table->double('percentage');
+            $table->text('description');
+            $table->text('hint_text')->nullable();
+            $table->string('hint_image')->nullable();
+            $table->double('hint_penalty', 15, 8)->nullable();
             $table->timestamps();
         });
     }
