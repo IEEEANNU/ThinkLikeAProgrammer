@@ -19,6 +19,7 @@ class CreateSubmissionsTable extends Migration
             $table->text('blocks');
             $table->text('image');
             $table->boolean('hint_used')->default(false);
+            $table->double('score', 15, 8);
             $table->timestamps();
         });
     }
