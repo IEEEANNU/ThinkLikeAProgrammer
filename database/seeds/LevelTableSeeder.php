@@ -8,7 +8,7 @@ class LevelTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('levels')->delete();
+        DB::table('levels')->truncate();
 
         Level::insert([
             ['name' => 'Level 1', 'mark' => 5.0],
