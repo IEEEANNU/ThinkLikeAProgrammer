@@ -20,10 +20,14 @@
                 <a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/cs.jpg')}}" width="100px"></a>
             </div>
         </div>
-        <div class="col-md-2 col-lg-offset-2">
+        <div class="col-md-2 col-md-offset-2">
             <a href="{{url('/')}}"><img src="{{asset('images/TLAP.jpg')}}" width="350px"></a>
         </div>
-        
+        <div class="col-md-2 col-md-offset-3">
+            <h4>Welcome {{\Auth::user()->name}}!</h4>
+            <a href="{{url('logout')}}" class="btn btn-danger">log out</a>
+        </div>
+        </div>
         @yield('content')
         
         <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
