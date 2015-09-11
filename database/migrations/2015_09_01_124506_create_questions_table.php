@@ -23,6 +23,7 @@ class CreateQuestionsTable extends Migration
             $table->text('hint_text')->nullable();
             $table->string('hint_image')->nullable();
             $table->double('hint_penalty', 15, 8)->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

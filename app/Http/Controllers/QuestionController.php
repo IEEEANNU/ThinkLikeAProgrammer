@@ -50,7 +50,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = Question::findOrFail($id);
+        $question = Question::activated()->findOrFail($id);
         $observation = $question->observations()
                             ->where('user_id', '=', \Request::user()->id)
                             ->firstOrCreate(['user_id'=>\Request::user()->id]);

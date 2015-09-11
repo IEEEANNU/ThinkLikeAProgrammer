@@ -14,16 +14,18 @@
         <div class="row">
         <div class="col-md-2" style="margin-left:40px">
             <div  style="margin-top:20px">
-                <a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/SBLogo.png')}}" width="100px" class=""></a>
+                <a href="https://www.facebook.com/ieeenajah"><img src="{{url('images/SBLogo.png')}}" width="100px" class=""></a>
             </div>
             <div style="margin-top:20px">
-                <a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/cs.jpg')}}" width="100px"></a>
+                <a href="https://www.facebook.com/ieeenajah"><img src="{{url('images/cs.jpg')}}" width="100px"></a>
             </div>
         </div>
         <div class="col-md-2 col-md-offset-2">
-            <a href="{{url('/')}}"><img src="{{asset('images/TLAP.jpg')}}" width="350px"></a>
+            <a href="{{url('/')}}"><img src="{{url('images/TLAP.jpg')}}" width="350px"></a>
         </div>
         <div class="col-md-2 col-md-offset-3">
+            <br>
+            <br>
             <h4>Welcome {{\Auth::user()->name}}!</h4>
             <a href="{{url('logout')}}" class="btn btn-danger">log out</a>
         </div>
