@@ -11,12 +11,13 @@
 |
 */
 
+Route::get('/','HomeController@home');
 Route::get('login','Auth\AuthController@getLogin');
 Route::post('login','Auth\AuthController@postLogin');
 Route::get('signup','Auth\AuthController@getRegister');
 Route::post('signup','Auth\AuthController@postRegister');
 Route::get('logout', 'Auth\AuthController@getLogout');
-//Route::resource('profile','profileCtrl');
+Route::resource('profile','profileController');
 //get('/profile',['middleware'=>'auth','uses','profileCtrl@index'])
 //---------------
 //Route::resource('{username}/{qid}','questionCtrl');
