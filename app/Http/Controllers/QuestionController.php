@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Question;
+use App\QuestionObservation;
 
 class QuestionController extends Controller
 {
@@ -50,7 +51,11 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = Question::findOrFail($id);
-        return view('questions.show')->with(compact(['question']));
+        $observation = $question->observations()
+                            ->where('user_id', '=', \Request::user()->id)
+                            ->firstOrCreate(['user_id'=>\Request::user()->id]);
+        $observation->touch();
+        return view('questions.show')->with(compact(['question', 'observation']));
     }
 
     /**
@@ -93,8 +98,18 @@ class QuestionController extends Controller
             if (empty($question)) {
                 retrun \Response::json(['error' => 'true', 'message' => 'Question Not found']);
             }
-            // TODO Observe
-            return \Response::json(['success' => 'true']);
+            $observation = $question->observations()
+                            ->where('user_id', '=', \Request::user()->id)
+                            ->firstOrNew(['user_id'=>\Request::user()->id]);
+            $observation->hint_used = true;
+            $observation->save();
+            return \Response::json([
+                'success' => 'true',
+                'data' => [
+                    'text' => $question->hint_text,
+                    'image' => $question->hint_image,
+                ],
+            ]);
         } else {
             return redirect()->home();
         }

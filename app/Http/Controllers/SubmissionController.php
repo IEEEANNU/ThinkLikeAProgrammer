@@ -36,7 +36,10 @@ class SubmissionController extends Controller
             }
             $submission = new Submission($request->all());
             $submission->user_id = $request->user()->id;
-            // TODO hint_used submission
+            $observation = $question->observations()
+                            ->where('user_id', '=', \Request::user()->id)
+                            ->firstOrCreate(['user_id'=>\Request::user()->id]);
+            $submission->hint_used = $observation->hint_used;
             $question->submissions()->save($submission);
             return \Response::json(['success' => 'true']);
         } else {

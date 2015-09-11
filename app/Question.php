@@ -14,4 +14,8 @@ class Question extends Model
     public function submissions() {
         return $this->hasMany('App\Submission');
     }
+    
+    public function observations() {
+        return $this->hasMany('\App\QuestionObservation');
+    }
 }
