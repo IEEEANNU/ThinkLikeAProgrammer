@@ -45,16 +45,13 @@
             @if($observation->hint_used)
                 <div>
                     <p id="hintText">{{$question->hint_text}}</p>
-                    @if(!empty($question->hint_image))
-                    <img id="hintImage" src="{{asset('images/hints/'.$question->hint_image)}}" alt="">
-                    @endif
+                    <img id="hintImage" src="{{asset('images/hints/'.$question->hint_image)}}" alt="" 
+                        class="{{empty($question->hint_image)? 'hidden': ''}}">
                 </div>
             @else
                 <div>
                     <p id="hintText"></p>
-                    @if(!empty($question->hint_image))
-                    <img id="hintImage" src="" alt="">
-                    @endif
+                    <img id="hintImage" src="" alt="" class="{{empty($question->hint_image)? 'hidden': ''}}">
                 </div>
             @endif
       </div>
@@ -84,7 +81,7 @@
 
 @section('scripts')
 <script type="text/javascript">
-    var hintUsed = {{$observation->hint_used}};
+    var hintUsed = {{$observation->hint_used? 'true': 'false'}};
     
     $(function(){
         $('#submit').popover({
@@ -140,7 +137,7 @@
             success: function(response) {
                 console.log(response);
                 $('#hintModal').find('#hintText').text(response.data.text);
-                $('#hintModal').find('#hintImage').src('{{asset("image/hints/")}}/' + response.data.image);
+                $('#hintModal').find('#hintImage')[0].src = ('{{asset("image/hints/")}}/' + response.data.image);
                 $('#hintModal').modal('show');
             }
         });

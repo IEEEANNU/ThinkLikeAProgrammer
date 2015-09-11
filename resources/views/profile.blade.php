@@ -12,33 +12,26 @@
       <hr>
         <div class="">
             @forelse($levels as $level)
-            <h3>{{ $level->name }}, Question Score: {{$level->mark}}</h3>
+            <h3>{{ $level->name }}</h3>
             <table class="table table-hover">
                 <thead>
                   <tr>
                     <th>Question Name</th>
-                    @if(false)
-                    <th>Your Score</th>
-                    @endif
+                    <th>Question Score</th>
                     <th>Last Submitted</th>
                   </tr>
                 </thead>
                 <tbody>
                     @foreach($level->questions as $question)
-                    <?php
-                      $Qsubmissions = \App\Submission::where('question_id','=',$question->id);
-
-                      $sorted = $collection->sortBy(function ($sth, $key) {
-                          return $sth['create_at'];
-                      });
-
-                    ?>
                       <tr>
                           <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
-                          @if(false)
-                          <td>0</td>
+                          <td>{{$level->mark}}</td>
+                          <?php $lastSub = $question->submissions->last(); ?>
+                          @if (!empty($lastSub))
+                          <td>{{$lastSub->created_at}}</td>
+                          @else
+                          <td> Never </td>
                           @endif
-                          <td>{{$sorted[0]}}</td>
                       </tr>
                     @endforeach
                 </tbody>
