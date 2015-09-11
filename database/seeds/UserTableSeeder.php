@@ -8,7 +8,7 @@ class UserTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('users')->delete();
+        DB::table('users')->truncate();
 
         User::create([
             'name' => 'Admin',
