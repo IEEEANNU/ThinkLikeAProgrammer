@@ -18,4 +18,13 @@ class Question extends Model
     public function observations() {
         return $this->hasMany('\App\QuestionObservation');
     }
+    
+    public function scopeActivated($q) {
+        return $q->where('active', '=', true)
+            ->whereExists(function ($query) {
+                $query->select(\DB::raw(1))
+                      ->from('levels')
+                      ->whereRaw('levels.id = questions.level_id');
+            });
+    }
 }
