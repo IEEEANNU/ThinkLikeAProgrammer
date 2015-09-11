@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Submission extends Model
 {
-    protected $fillable = ['blocks', 'image', 'hint_used'];
+    protected $fillable = ['blocks', 'image'];
     
     public function user() {
         return $this->belongsTo('App\User');
