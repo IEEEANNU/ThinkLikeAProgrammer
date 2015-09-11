@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Question;
 
 class QuestionController extends Controller
 {
@@ -46,9 +47,10 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($username,$level,$qid)
+    public function show($id)
     {
-      return view('question')->with('id',$qid);
+        $question = Question::findOrFail($id);
+        return view('questions.show')->with(compact(['question']));
     }
 
     /**
