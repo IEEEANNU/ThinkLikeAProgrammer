@@ -57,6 +57,10 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasManyThrough('\App\Assessment', '\App\Submission');
     }
     
+    public function observations() {
+        return $this->hasMany('\App\QuestionObservation');
+    }
+    
     /**
     * Calculates and updates the total score of a user.
     * 

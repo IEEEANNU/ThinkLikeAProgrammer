@@ -7,6 +7,7 @@
         <link href="{{asset('css/jquery-ui.min.css')}}" media="all" rel="stylesheet" />
         <link href="{{asset('css/jquery-ui.theme.min.css')}}" media="all" rel="stylesheet" />
         <meta name="_token" content="{!! csrf_token() !!}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
 
@@ -27,6 +28,7 @@
         
         <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
         <script type="text/javascript">
         $.ajaxSetup({
            headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }

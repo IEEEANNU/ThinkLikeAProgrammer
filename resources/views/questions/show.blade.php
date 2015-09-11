@@ -2,58 +2,149 @@
 
 @section('content')
 <hr>
-<div class="row">
-    <div class="col-md-8 col-md-offset-1" >
-        <h1>{{ $question->name}}</h1>
-        <p>{{ $question->description }}</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" >
+            <h1>{{ $question->name}}</h1>
+            <p>{{ $question->description }}</p>
+        </div>
+        <div class="col-md-6">
+            <img src="{{asset('images/questions/'.$question->image)}}" alt="">
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-8">
+            @if(!empty($question->hint_text))
+            <button id="hint" class="btn btn-success btn-block">Hint</button>
+            @endIf
+        </div>
+        <div class="col-md-2 pull-right">
+            <button id="submit" class="btn btn-danger btn-block">Submit</button>
+        </div>
+    </div>
+    <div class="row">
+        <div id="successfulSubmission" class="alert alert-success fade in hidden">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Your work has been submitted successfully.
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-2 col-md-offset-8">
-        @if(!empty($question->hint_text))
-        <button id="hint" class="btn btn-success">Hint ( {{$question->hint_penalty * 100}}% penalty )</button>
-        @endIf
-    </div>
-    <div class="col-md-1">
-        <button id="submit" class="btn btn-danger">Submit</button>
-    </div>
-</div>
+
 <iframe class="game" src="{{url('/game/apps/turtle/index.html')}}" width="95%" height="655" sandbox="allow-same-origin allow-scripts"></iframe>
+
+<!-- Hint Modal -->
+<div class="modal fade" id="hintModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Hint</h4>
+      </div>
+      <div class="modal-body">
+            @if($observation->hint_used)
+                <div>
+                    <p id="hintText">{{$question->hint_text}}</p>
+                    @if(!empty($question->hint_image))
+                    <img id="hintImage" src="{{asset('images/hints/'.$question->hint_image)}}" alt="">
+                    @endif
+                </div>
+            @else
+                <div>
+                    <p id="hintText"></p>
+                    @if(!empty($question->hint_image))
+                    <img id="hintImage" src="" alt="">
+                    @endif
+                </div>
+            @endif
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Hint Modal -->
+<div class="modal fade" id="confirmHintModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h3>Are you sure you want to see the hint?</h3>
+        <p>That will cost you {{$question->hint_penalty * 100}}% of this level's score</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        <button id="hintConfirmed" type="button" class="btn btn-success">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 @stop
 
 @section('scripts')
 <script type="text/javascript">
-$('#submit').click(function(){
-    var Blockly  = $('.game')[0].contentWindow.Blockly;
-    var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
-    var blocks = encodeURIComponent(xml.innerHTML);
-    var image = $('.game')[0].contentDocument.getElementById('display').toDataURL('image/png');
+    var hintUsed = {{$observation->hint_used}};
     
-    $.ajax({
-        url:'{{url("question/".$question->id."/submit")}}',
-        type: 'POST',
-        data: {
-            blocks: blocks,
-            image: image
-        },
-        success: function(response) {
-            alert(response); // TODO
-        }
+    $(function(){
+        $('#submit').popover({
+            content:'You must run your program first',
+            placement:'bottom',
+            container:'body',
+            trigger:'manual'
+        });
     });
-});
+    
+    $('#submit').click(function(){
+        var Blockly  = $('.game')[0].contentWindow.Blockly;
+        var Turtle  = $('.game')[0].contentWindow.Turtle;
 
-$('#hint').click(function() {
-    var confirmed = confirm('Are you sure you want the hint?<br> That will cost you {{$question->hint_penalty * 100}}% of this leve\'s score');
-    if (confirmed) {
+        // Has to be runned
+        if (!Turtle.executed) {
+            $('#submit').popover('show');
+            return false;
+        }
+        $('#submit').popover('hide');
+        
+        var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
+        var blocks = encodeURIComponent(xml.innerHTML);
+        var image = $('.game')[0].contentDocument.getElementById('display').toDataURL('image/png');
+
         $.ajax({
-        url:'{{url("question/".$question->id."/hint")}}',
-        type: 'GET',
-        data: {},
-        success: function() {
-            alert('{{$question->hint_text}}'); // TODO
+            url:'{{url("question/".$question->id."/submit")}}',
+            type: 'POST',
+            data: {
+                blocks: blocks,
+                image: image
+            },
+            success: function(response) {
+                $('#successfulSubmission').removeClass('hidden');
+            }
+        });
+    });
+
+    $('#hint').click(function() {
+        if (hintUsed) {
+            $('#hintModal').modal('show');
+        } else {
+            $('#confirmHintModal').modal('show');
         }
     });
-    }
-});
+    
+    $('#hintConfirmed').click(function() {
+        $('#confirmHintModal').modal('hide');
+        $.ajax({
+            url:'{{url("question/".$question->id."/hint")}}',
+            type: 'GET',
+            data: {},
+            success: function(response) {
+                console.log(response);
+                $('#hintModal').find('#hintText').text(response.data.text);
+                $('#hintModal').find('#hintImage').src('{{asset("image/hints/")}}/' + response.data.image);
+                $('#hintModal').modal('show');
+            }
+        });
+        
+    });
 </script>
 @stop
