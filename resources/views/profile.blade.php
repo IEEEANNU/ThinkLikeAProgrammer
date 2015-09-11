@@ -1,34 +1,30 @@
 @extends('app')
 
 @section('content')
-<hr>
+<div class="container">
 <div class="row">
 
-    <div class="col-lg-8 col-lg-offset-1" >
-      <hr>
-      <p>Welcome {{\Auth::user()->name}}
-      <br>
-      <a href="{{url('logout')}}">log out</a>
-      <hr>
+    <div class="col-md-8" >
         <div class="">
             @forelse($levels as $level)
             <h3>{{ $level->name }}</h3>
+            <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>Question Name</th>
-                    <th>Question Score</th>
-                    <th>Last Submitted</th>
+                    <th width="40%">Question Name</th>
+                    <th width="20%">Question Score</th>
+                    <th width="40%">Last Submitted</th>
                   </tr>
                 </thead>
                 <tbody>
                     @foreach($level->questions as $question)
                       <tr>
                           <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
-                          <td>{{$level->mark}}</td>
+                          <td>{{round($level->mark,1)}}</td>
                           <?php $lastSub = $question->submissions->last(); ?>
                           @if (!empty($lastSub))
-                          <td>{{$lastSub->created_at}}</td>
+                          <td>{{\Carbon\Carbon::parse($lastSub->created_at)->toDayDateTimeString()}}</td>
                           @else
                           <td> Never </td>
                           @endif
@@ -36,6 +32,7 @@
                     @endforeach
                 </tbody>
             </table>
+            </div>
             <hr>
             @empty
             <h1>Competition Has not yet started</h1>
@@ -43,7 +40,7 @@
         </div>
     </div>
     @if(false)
-    <div class=" col-lg-2 col-lg-offset-0 well">
+    <div class=" col-md-2 well">
         <div class="row">
             <center><label style="font-size:21px; color:#19a2e4;">Leaderboard</label></center>
             <hr>
@@ -75,5 +72,6 @@
         </div>
     </div>
   @endif
+</div>
 </div>
 @stop

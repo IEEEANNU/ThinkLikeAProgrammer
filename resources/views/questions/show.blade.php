@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('content')
-<hr>
 <div class="container">
     <div class="row">
         <div class="col-md-6" >
@@ -137,7 +136,7 @@
             success: function(response) {
                 console.log(response);
                 $('#hintModal').find('#hintText').text(response.data.text);
-                $('#hintModal').find('#hintImage')[0].src = ('{{asset("image/hints/")}}/' + response.data.image);
+                $('#hintModal').find('#hintImage')[0].src = ('{{asset("images/hints/")}}/' + response.data.image);
                 $('#hintModal').modal('show');
             }
         });
