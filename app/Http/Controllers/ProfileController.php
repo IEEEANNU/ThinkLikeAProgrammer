@@ -6,46 +6,34 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
+use App\Level;
+use App\User;
 
-class profileCtrl extends Controller
+class ProfileController extends Controller
 {
-  public function __construct(){
-    $this->middleware('auth');
-  }
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index()
-    {
-      // $a = [];
-      // $a = session()->pull('userSession');
-
-      $leaders = array();
-      $users = DB::table('users')->get();
-      $leaders[0] = $users[0];
-      $leaders[1] = $users[1];
-      $leaders[2] = $users[2];
-      foreach ($users as $user) {
-        if($user->total_score > $leaders[0]->total_score)
-        {
-          $leaders[0] = $user;
-        }
-        else if($user->total_score > $leaders[1]->total_score)
-        {
-          $leaders[1] = $user;
-        }
-        else if($user->total_score > $leaders[2]->total_score)
-        {
-          $leaders[2] = $user;
-        }
-      }
-
-      $questions = DB::table('questions')->get();
-
-      return view('profile')->withLeaders($leaders)->withQuestions($questions);
+    public function index() {
+        
+        $levels = Level::where('active', '=', true)->get();
+        
+        // Maximum obtainable score from the currently available levels
+        $maxScore = $levels->reduce(function($carry, $item){
+            return $carry + $item->questions->count() * $item->mark;
+        }, 1);
+        
+        // For leaderboard.
+        $leaders = User::orderBy('total_score', 'desc')
+            ->get();
+        
+        $myRank = 1 + $leaders->search(function($item, $key){
+            return $item->id == \Auth::user()->id;
+        });
+        $myTotalScore = \Auth::user()->total_score;
+        return view('profile', compact(['levels', 'leaders', 'myRank', 'myTotalScore', 'maxScore']));
     }
 
     /**
