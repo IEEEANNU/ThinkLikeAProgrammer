@@ -22,7 +22,9 @@
                       <tr>
                           <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
                           <td>{{round($level->mark,1)}}</td>
-                          <?php $lastSub = $question->submissions->last(); ?>
+                          <?php $lastSub = $question->submissions()
+                            ->where('user_id', '=', Auth::user()->id)
+                            ->orderBy('created_at', 'desc')->first(); ?>
                           @if (!empty($lastSub))
                           <td>{{\Carbon\Carbon::parse($lastSub->created_at)->toDayDateTimeString()}}</td>
                           @else

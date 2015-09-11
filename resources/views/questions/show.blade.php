@@ -3,6 +3,17 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div id="successfulSubmission" class="alert alert-success fade in hidden">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            Your work has been submitted successfully! Please wait while we grade it.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <a class="btn btn-default" href="{{url('profile')}}">&#8592; Go back</a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-6" >
             <h1>{{ $question->name}}</h1>
             <p>{{ $question->description }}</p>
@@ -20,12 +31,6 @@
         </div>
         <div class="col-md-2 pull-right">
             <button id="submit" class="btn btn-danger btn-block">Submit</button>
-        </div>
-    </div>
-    <div class="row">
-        <div id="successfulSubmission" class="alert alert-success fade in hidden">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>Success!</strong> Your work has been submitted successfully.
         </div>
     </div>
 </div>
@@ -84,7 +89,7 @@
     
     $(function(){
         $('#submit').popover({
-            content:'You must run your program first',
+            content:'Please run your program first',
             placement:'bottom',
             container:'body',
             trigger:'manual'
