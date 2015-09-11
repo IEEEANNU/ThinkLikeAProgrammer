@@ -24,7 +24,8 @@ class Question extends Model
             ->whereExists(function ($query) {
                 $query->select(\DB::raw(1))
                       ->from('levels')
-                      ->whereRaw('levels.id = questions.level_id');
+                      ->whereRaw('levels.id = questions.level_id')
+                      ->where('levels.active', '=', true);
             });
     }
 }

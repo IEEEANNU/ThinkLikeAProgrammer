@@ -30,6 +30,7 @@
             <a href="{{url('logout')}}" class="btn btn-danger">log out</a>
         </div>
         </div>
+        <hr class="clear">
         @yield('content')
         
         <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
