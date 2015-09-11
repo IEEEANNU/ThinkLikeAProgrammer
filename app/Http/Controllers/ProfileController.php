@@ -17,18 +17,18 @@ class ProfileController extends Controller
      * @return Response
      */
     public function index() {
-        
+
         $levels = Level::where('active', '=', true)->get();
-        
+
         // Maximum obtainable score from the currently available levels
         $maxScore = $levels->reduce(function($carry, $item){
             return $carry + $item->questions->count() * $item->mark;
         }, 1);
-        
+
         // For leaderboard.
         $leaders = User::orderBy('total_score', 'desc')
             ->get();
-        
+
         $myRank = 1 + $leaders->search(function($item, $key){
             return $item->id == \Auth::user()->id;
         });
@@ -65,7 +65,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-      return 'go inside the $id (sub)';
+      // return 'go inside the $id (sub)';
     }
 
     /**
@@ -76,7 +76,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        return "you're editing $id (sub)";
+        // return "you're editing $id (sub)";
     }
 
     /**
@@ -88,7 +88,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "saving the edited $id";
+        // return "saving the edited $id";
     }
 
     /**
@@ -99,7 +99,7 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        return "deleting it";
+        // return "deleting it";
     }
 
 }
