@@ -17,7 +17,9 @@ Route::post('login','Auth\AuthController@postLogin');
 Route::get('signup','Auth\AuthController@getRegister');
 Route::post('signup','Auth\AuthController@postRegister');
 Route::get('logout', 'Auth\AuthController@getLogout');
-Route::resource('profile','profileController');
+Route::group(['middleware' => 'auth'], function($router){
+    $router->resource('profile','profileController');
+});
 //get('/profile',['middleware'=>'auth','uses','profileCtrl@index'])
 //---------------
 //Route::resource('{username}/{qid}','questionCtrl');
