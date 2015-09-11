@@ -3,24 +3,53 @@
 @section('content')
 <hr>
 <div class="row">
+
     <div class="col-lg-8 col-lg-offset-1" >
+      <hr>
+      <p>Welcome {{\Auth::user()->name}}
+      <br>
+      <a href="{{url('logout')}}">log out</a>
+      <hr>
         <div class="">
             @forelse($levels as $level)
             <h3>{{ $level->name }}, Question Score: {{$level->mark}}</h3>
             <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Question Name</th>
+                    @if(false)
+                    <th>Your Score</th>
+                    @endif
+                    <th>Last Submitted</th>
+                  </tr>
+                </thead>
                 <tbody>
-                    <tr>
                     @foreach($level->questions as $question)
-                        <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
+                    <?php
+                      $Qsubmissions = \App\Submission::where('question_id','=',$question->id);
+
+                      $sorted = $collection->sortBy(function ($sth, $key) {
+                          return $sth['create_at'];
+                      });
+
+                    ?>
+                      <tr>
+                          <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
+                          @if(false)
+                          <td>0</td>
+                          @endif
+                          <td>{{$sorted[0]}}</td>
+                      </tr>
                     @endforeach
-                    </tr>
                 </tbody>
             </table>
+            <hr>
             @empty
             <h1>Competition Has not yet started</h1>
             @endforelse
         </div>
     </div>
+    @if(false)
     <div class=" col-lg-2 col-lg-offset-0 well">
         <div class="row">
             <center><label style="font-size:21px; color:#19a2e4;">Leaderboard</label></center>
@@ -52,5 +81,6 @@
             </div>
         </div>
     </div>
+  @endif
 </div>
 @stop
