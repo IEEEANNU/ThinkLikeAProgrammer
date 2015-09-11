@@ -86,4 +86,17 @@ class QuestionController extends Controller
     {
         //
     }
+    
+    public function hint(Request $request, $id) {
+        if ($request->ajax()) {
+            $question = Question::find($id);
+            if (empty($question)) {
+                retrun \Response::json(['error' => 'true', 'message' => 'Question Not found']);
+            }
+            // TODO Observe
+            return \Response::json(['success' => 'true']);
+        } else {
+            return redirect()->home();
+        }
+    }
 }
