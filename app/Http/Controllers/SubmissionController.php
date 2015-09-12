@@ -30,7 +30,7 @@ class SubmissionController extends Controller
     public function submit(Request $request, $questionId)
     {
         if ($request->ajax()) {
-            $question = Question::find($questionId);
+            $question = Question::find($questionId); // TODO
             if (empty($question)) {
                 retrun \Response::json(['error' => 'true', 'message' => 'Question Not found']);
             }
