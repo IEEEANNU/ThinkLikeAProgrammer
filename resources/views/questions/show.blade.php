@@ -19,7 +19,11 @@
             <p>{{ $question->description }}</p>
         </div>
         <div class="col-md-6">
+            <div width="400" height="400" style="position: relative;">
             <img src="{{asset('images/questions/'.$question->image)}}" alt="">
+            <canvas id="measure" width="400" height="400" 
+            style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+            </div>
         </div>
 
     </div>
@@ -94,6 +98,7 @@
             container:'body',
             trigger:'manual'
         });
+        createMeasurement($('#measure')[0]);
     });
     
     $('#submit').click(function(){

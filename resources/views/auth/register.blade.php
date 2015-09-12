@@ -39,6 +39,6 @@
 			  <input name="password_confirmation" type="password" class="form-control" aria-describedby="basic-addon1">
 			</div>
 			<br>
-			<button type="submit" class="col-xs-4 col-lg-offset-4 btn btn-info">Sign Up</button>
+			<button type="submit" class="col-xs-4 col-xs-offset-4 btn btn-info">Sign Up</button>
 		</form>
     @stop

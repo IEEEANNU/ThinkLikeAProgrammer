@@ -6,7 +6,7 @@
 </head>
 <body>
 	<center>
-		<img src="{{asset('images/TLAP.jpg')}}" width="350px">
+		<a href="{{url('/')}}"><img src="{{url('images/TLAP.jpg')}}" width="350px"></a>
 
     @yield('content')
 
@@ -14,7 +14,7 @@
   <br>
   </center>
   <hr>
-  <a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/SBLogo.png')}}" width="150px" class="col-lg-offset-4"></a>
-  <a href="https://www.facebook.com/ieeenajah"><img src="{{asset('images/cs.jpg')}}" width="150px" class="col-lg-offset-1"></a>
+  <a href="https://www.facebook.com/ieeenajah"><img src="{{url('images/SBLogo.png')}}" width="150px" class="col-lg-offset-4"></a>
+  <a href="https://www.facebook.com/ieeenajah"><img src="{{url('images/cs.jpg')}}" width="150px" class="col-lg-offset-1"></a>
 </body>
 </html>

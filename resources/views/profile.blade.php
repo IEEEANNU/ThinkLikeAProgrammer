@@ -19,6 +19,7 @@
                 </thead>
                 <tbody>
                     @foreach($level->questions as $question)
+                    @if($question->active)
                       <tr>
                           <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
                           <td>{{round($level->mark,1)}}</td>
@@ -31,6 +32,7 @@
                           <td> Never </td>
                           @endif
                       </tr>
+                    @endif
                     @endforeach
                 </tbody>
             </table>
