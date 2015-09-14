@@ -125,6 +125,7 @@
             },
             success: function(response) {
                 $('#successfulSubmission').removeClass('hidden');
+                window.scrollTo(0, 0);
             }
         });
     });
