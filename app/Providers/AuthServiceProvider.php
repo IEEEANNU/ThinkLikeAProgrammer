@@ -26,6 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        //
+        $gate->define('grade', function ($user, $a) {
+            return $user->is_grader == 1;
+        });
+        
+        $gate->before(function ($user, $ability) {
+            if ($user->isSuperAdmin()) {
+                return true;
+            }
+        });
     }
 }

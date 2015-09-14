@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Think Like A Programmer</title>
-	<link href="{{asset('css/bootstrap.min.css')}}" media="all" rel="stylesheet" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="all" rel="stylesheet" />
 </head>
 <body>
 	<center>

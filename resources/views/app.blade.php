@@ -2,10 +2,10 @@
 <html>
     <head>
         <title>Think Like A Programmer</title>
-        <link href="{{asset('css/bootstrap.min.css')}}" media="all" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="all" rel="stylesheet" />
         <link href="{{asset('css/style.css')}}" media="all" rel="stylesheet" />
-        <link href="{{asset('css/jquery-ui.min.css')}}" media="all" rel="stylesheet" />
-        <link href="{{asset('css/jquery-ui.theme.min.css')}}" media="all" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css" media="all" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.theme.min.css" media="all" rel="stylesheet" />
         <meta name="_token" content="{!! csrf_token() !!}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
@@ -33,9 +33,9 @@
         <hr class="clear">
         @yield('content')
         
-        <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{{asset('js/measurement.js')}}"></script>
         <script type="text/javascript">
         $.ajaxSetup({
