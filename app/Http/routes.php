@@ -19,7 +19,11 @@ Route::post('signup','Auth\AuthController@postRegister');
 Route::get('logout', 'Auth\AuthController@getLogout');
 Route::group(['middleware' => 'auth'], function($router){
     $router->resource('profile','ProfileController');
-    $router->post('question/{questionId}/submit', 'SubmissionController@submit');
+    Route::group(['as' => 'Submission::', 'prefix' => 'question/{questionId}'], function($r){
+        $r->post('submit', ['as' => 'submit', 'uses' => 'SubmissionController@submit']);
+        $r->get('submissions/', ['as' => 'index', 'uses' => 'SubmissionController@index']);
+        $r->get('submissions/{id}', ['as' => 'show', 'uses' => 'SubmissionController@show']);
+    });
     $router->get('question/{questionId}/hint', 'QuestionController@hint');
     $router->resource('question','QuestionController');
 });

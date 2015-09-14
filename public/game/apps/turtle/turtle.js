@@ -101,13 +101,13 @@ Turtle.init = function() {
   // (execute) and the infinite loop detection function.
   Blockly.JavaScript.addReservedWords('Turtle,code');
 
-  window.addEventListener('beforeunload', function(e) {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      e.returnValue = BlocklyApps.getMsg('Turtle_unloadWarning');  // Gecko.
-      return BlocklyApps.getMsg('Turtle_unloadWarning');  // Webkit.
-    }
-    return null;
-  });
+//   window.addEventListener('beforeunload', function(e) {
+//     if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
+//       e.returnValue = BlocklyApps.getMsg('Turtle_unloadWarning');  // Gecko.
+//       return BlocklyApps.getMsg('Turtle_unloadWarning');  // Webkit.
+//     }
+//     return null;
+//   });
 
   // Hide download button if browser lacks support
   // (http://caniuse.com/#feat=download).

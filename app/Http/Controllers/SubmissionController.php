@@ -18,7 +18,9 @@ class SubmissionController extends Controller
      */
     public function index($questionId)
     {
-        //
+        $question = Question::findOrFail($questionId);
+        $submissions = $question->submissions;
+        return view('submissions.index')->with(compact(['question', 'submissions']));
     }
 
     /**
@@ -56,6 +58,8 @@ class SubmissionController extends Controller
      */
     public function show($questionId, $id)
     {
-        //
+        $question = Question::findOrFail($questionId);
+        $submission = Submission::findOrFail($id);
+        return view('submissions.show')->with(compact(['question', 'submission']));
     }
 }
