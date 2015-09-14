@@ -3,3 +3,8 @@
     margin-left: 2.5%;
     margin-top: 10px;
 }
+
+.hidden {
+    visibility: none;
+    display: none;
+}
