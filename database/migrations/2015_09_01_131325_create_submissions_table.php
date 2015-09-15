@@ -16,8 +16,8 @@ class CreateSubmissionsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('question_id')->unsigned();
-            $table->text('blocks');
-            $table->text('image');
+            $table->longText('blocks');
+            $table->longText('image');
             $table->boolean('hint_used')->default(false);
             $table->double('score', 15, 8);
             $table->timestamps();

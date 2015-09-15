@@ -41,17 +41,21 @@
     <!-- TODO diff & assess -->
 </div>
 
-<iframe class="game" src="{{'https://thinklikeaprogrammer.appspot.com/static/apps/turtle/index.html?blocks='.$submission->blocks}}" width="95%" height="655" sandbox="allow-same-origin allow-scripts"></iframe>
+<iframe class="game" src="{{url('/game/apps/turtle/index.html')}}" width="95%" height="655" sandbox="allow-same-origin allow-scripts"></iframe>
 
 @stop
 
 @section('scripts')
 <script type="text/javascript">
-    
+    var defaultXml = '<xml>' + decodeURIComponent('{{$submission->blocks}}') + '</xml>';
     $(function(){
         $('.measure').each(function(){
             createMeasurement(this);
-        })
+        });
     });
+    $('.game').on('load', function(){
+        var BlocklyApps  = this.contentWindow.BlocklyApps;
+        BlocklyApps.loadBlocks(defaultXml);
+    })
 </script>
 @stop

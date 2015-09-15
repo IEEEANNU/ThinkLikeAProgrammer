@@ -14,7 +14,11 @@
                   <tr>
                     <th width="40%">Question Name</th>
                     <th width="20%">Question Score</th>
+                    @can('grade', $level)
+                    <th width="40%">Submissions</th>
+                    @else
                     <th width="40%">Last Submitted</th>
+                    @endcan
                   </tr>
                 </thead>
                 <tbody>
@@ -23,6 +27,9 @@
                       <tr>
                           <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
                           <td>{{round($level->mark,1)}}</td>
+                          @can('grade', $level)
+                          <td><a class="btn btn-danger" href="{{route('Submission::index', ['questionId' => $question->id])}}">View Submissions</a></td>
+                          @else
                           <?php $lastSub = $question->submissions()
                             ->where('user_id', '=', Auth::user()->id)
                             ->orderBy('created_at', 'desc')->first(); ?>
@@ -31,6 +38,7 @@
                           @else
                           <td> Never </td>
                           @endif
+                          @endcan
                       </tr>
                     @endif
                     @endforeach
