@@ -24,6 +24,10 @@ Route::group(['middleware' => 'auth'], function($router){
         $r->get('submissions/', ['as' => 'index', 'uses' => 'SubmissionController@index']);
         $r->get('submissions/{id}', ['as' => 'show', 'uses' => 'SubmissionController@show']);
     });
+    Route::group(['as' => 'Assessment::', 'prefix' => 'question/{questionId}/submissions/{submissionId}'], function($r){
+        $r->post('assess', ['as' => 'assess', 'uses' => 'AssessmentController@assess']);
+        $r->get('assessments/', ['as' => 'index', 'uses' => 'AssessmentController@index']);
+    });
     $router->get('question/{questionId}/hint', 'QuestionController@hint');
     $router->resource('question','QuestionController');
 });
