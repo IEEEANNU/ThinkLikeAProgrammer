@@ -3,23 +3,25 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <div class="col-md-8" >
+    <div class="col-md-10" >
         <div class="">
             <h1>Submissions for Question #{{$question->id}}: {{ $question->name }}</h1>
             <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th width="30%">User</th>
+                    <th width="20%">User</th>
+                    <th width="20%">Email</th>
                     <th width="20%">Score</th>
                     <th width="30%">Last Assessed</th>
-                    <th width="20%">View<th>
+                    <th width="10%">View<th>
                   </tr>
                 </thead>
                 <tbody>
                     @foreach($submissions as $submission)
                       <tr>
                           <td>{{$submission->user->name}}</td>
+                          <td>{{$submission->user->email}}</td>
                           <td>{{round($submission->score,3)}}</td>
                           <?php $lastAssessment = $submission->assessments()
                             ->orderBy('created_at', 'desc')->first(); ?>

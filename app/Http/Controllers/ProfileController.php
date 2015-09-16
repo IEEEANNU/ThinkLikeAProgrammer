@@ -17,8 +17,13 @@ class ProfileController extends Controller
      * @return Response
      */
     public function index() {
-
-        $levels = Level::where('active', '=', true)->with('questions.submissions')->get();
+        
+        if(\Auth::user()->cannot('grade', null)) {
+            $levels = Level::where('active', '=', true)->with('questions.submissions')->get();
+            
+        } else {
+            $levels = Level::with('questions.submissions')->get();
+        }
 
         // Maximum obtainable score from the currently available levels
         $maxScore = $levels->reduce(function($carry, $item){

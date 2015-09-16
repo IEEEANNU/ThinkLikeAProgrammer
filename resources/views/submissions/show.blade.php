@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-6" >
             <h1>{{ $question->name }}</h1>
-            <h3>Submitted by {{$submission->user->name}}</h3>
+            <h3>Submitted by {{$submission->user->name}}, {{$submission->user->email}}</h3>
             <p>{{ $question->description }}</p>
         </div>
     </div>
