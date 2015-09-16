@@ -13,7 +13,7 @@
                 <h1>Assessments for Submission.</h1>
                 <h3>submitted by user {{$submission->user->name}}, {{$submission->user->email}}</h3>
                 <h3>Question #{{$question->id}}: {{ $question->name }}</h3>
-                <p>Final Submission Grade {{$submission->score}}</p>
+                <p>Final Submission Grade {{round($submission->score, 5)}}</p>
                 @if(!empty($assessments))
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -30,7 +30,7 @@
                             <tr>
                                 <td>{{$assessment->grader->name}}</td>
                                 <td>{{round($assessment->grade,5)*100.0}}%</td>
-                                <td>{{round($assessment->final_grade,3)}}</td>
+                                <td>{{round($assessment->final_grade,5)}}</td>
                                 <td>{{\Carbon\Carbon::parse($assessment->created_at)->toDayDateTimeString()}}</td>
                             </tr>
                             @endforeach

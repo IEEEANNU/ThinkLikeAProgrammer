@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Submission;
 use App\Question ;
+use App\Assessment;
 
 class SubmissionController extends Controller
 {
@@ -61,7 +62,9 @@ class SubmissionController extends Controller
     {
         $question = Question::findOrFail($questionId);
         $this->authorize('grade', $question);
-        $submission = Submission::findOrFail($id);
-        return view('submissions.show')->with(compact(['question', 'submission']));
+        $submission = $question->submissions()->findOrFail($id);
+        $prevId = $question->submissions()->where('created_at', '<', $submission->created_at)->max('id');
+        $nextId = $question->submissions()->where('created_at', '>', $submission->created_at)->min('id');
+        return view('submissions.show')->with(compact(['question', 'submission', 'nextId', 'prevId']));
     }
 }
