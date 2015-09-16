@@ -36,11 +36,14 @@ class AssessmentController extends Controller
     {
         if ($request->ajax()) {
             $question = Question::find($questionId); // TODO
-            $this->authorize('grade', $question);
+            
+            if ($request->user()->cannot('grade', $question)) {
+                retrun \Response::json(['error' => 'true', 'message' => 'Question Not found']);
+            }
             if (empty($question)) {
                 retrun \Response::json(['error' => 'true', 'message' => 'Question Not found']);
             }
-            $submission = Submission::findOrFail($id);
+            $submission = Submission::findOrFail($submissionId);
             $assessment = new Assessment($request->all());
             $assessment->submission_id = $submission->id;
             $assessment->grader_id = $request->user()->id;
