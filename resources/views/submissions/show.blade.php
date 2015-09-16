@@ -38,7 +38,16 @@
             </div>
         </div>
     </div>
-    <!-- TODO diff & assess -->
+    <div class="row">
+        <div class="col-md-6">
+        <form id="assessmentForm" method="post" action="">
+            <label for="grade">Grade:</label>
+            <input type="range" name="grade" id="grade" value="50" min="0" max="100">
+            <button type="submit">Submit</button>
+        </form>
+        </div>
+    </div>
+    <!-- TODO diff -->
 </div>
 
 <iframe class="game" src="{{url('/game/apps/turtle/index.html')}}" width="95%" height="655" sandbox="allow-same-origin allow-scripts"></iframe>
@@ -56,6 +65,20 @@
     $('.game').on('load', function(){
         var BlocklyApps  = this.contentWindow.BlocklyApps;
         BlocklyApps.loadBlocks(defaultXml);
+    })
+    $('#assessmentForm').submit(function(event){
+        event.preventDefault();
+        $.ajax({
+            data: {
+                grade: $(this).find('input#grade').val()*100.0
+            },
+            type: 'POST',
+            url: "{{route(Assessment::assess, ['questionId' => $question->id, 'submissionId' => $submission->id])}}",
+            success: function(response) {
+                $('#successfulSubmission').removeClass('hidden');
+                window.scrollTo(0, 0);
+            }
+        });
     })
 </script>
 @stop
