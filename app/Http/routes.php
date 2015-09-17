@@ -12,6 +12,7 @@
 */
 
 Route::get('/','HomeController@home');
+Route::get('/leaderboard','HomeController@leaderboard');
 Route::get('login','Auth\AuthController@getLogin');
 Route::post('login','Auth\AuthController@postLogin');
 Route::get('signup','Auth\AuthController@getRegister');
