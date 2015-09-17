@@ -51,7 +51,7 @@
             @endforelse
         </div>
     </div>
-    @if(false)
+    @can('grade', null)
     <div class=" col-md-2 well">
         <div class="row">
             <center><label style="font-size:21px; color:#19a2e4;">Leaderboard</label></center>
@@ -63,13 +63,13 @@
                 {{$i+1}}.<span>{{$leader->name}}</span>
                 <div class="progress">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="10" aria-valuemax="100" style="width:{{$leader->total_score *100 / $maxScore}}%">
-                        <span id="topscore{{$leader->id}}">{{$leader->total_score}}</span>
+                        <span id="topscore{{$leader->id}}">{{round($leader->total_score, 5)}}</span>
                     </div>
                 </div>
             </div>
             <br>
             @endforeach
-
+            
             <div class=""><hr></div>
             <div class="row">
                 <center><label style="font-size:17px; color:#19a2e4;">You are #<span>{{$myRank}}</span></label></center>
@@ -77,13 +77,16 @@
             <div class="" style="height:25px;">
                 <div class="progress">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:{{$myTotalScore *100 / $maxScore}}%">
-                        <span data-width="{{$myTotalScore}}">{{$myTotalScore}}</span>
+                        <span data-width="{{$myTotalScore}}">{{round($myTotalScore,5)}}</span>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1"><a class="btn btn-success" href="{{url('leaderboard')}}" width="100%">Full Leaderboard</a></div>            
+            </div>
         </div>
     </div>
-  @endif
+    @endcan
 </div>
 </div>
 @stop
