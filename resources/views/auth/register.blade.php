@@ -2,7 +2,7 @@
 
     @section('content')
 
-		<form action="{{url('signup')}}" method="POST">
+		<form action="{{route('signupPost')}}" method="POST">
 			{!! csrf_field() !!}
 			<table class="table" style="width:50%; margin:0 auto">
 				@if(count($errors)>0)

@@ -27,7 +27,7 @@
             <br>
             <br>
             <h4>Welcome {{\Auth::user()->name}}!</h4>
-            <a href="{{url('logout')}}" class="btn btn-danger">log out</a>
+            <a href="{{route('logoutGet')}}" class="btn btn-danger">log out</a>
         </div>
         </div>
         <hr class="clear">
