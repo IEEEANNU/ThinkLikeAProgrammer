@@ -10,6 +10,7 @@ class QuestionTableSeeder extends Seeder {
     {
         DB::table('questions')->truncate();
 
+<<<<<<< HEAD
         Question::insert(array(
             array("level_id"=>1,"link"=>"https://thinklikeaprogrammer.appspot.com/static/apps/turtle/index.html#2iq6us","name"=>"Square","description"=>"simple square","hint_image"=>"","hint_text"=>"keep turning left and right","hint_penalty"=>0.2,"image"=>"q1.jpg"),
             array("level_id"=>1,"link"=>"https://thinklikeaprogrammer.appspot.com/static/apps/turtle/index.html#64e79o","name"=>"Diamond","description"=>"Diamond","hint_image"=>"","hint_text"=>"There will be a total of six turns","hint_penalty"=>0.2,"image"=>"q2.jpg"),
@@ -40,6 +41,11 @@ class QuestionTableSeeder extends Seeder {
             array("level_id"=>5,"link"=>"https://thinklikeaprogrammer.appspot.com/static/apps/turtle/index.html#77dtgy","name"=>"Circles","description"=>"Circles, Circles everywhere!!!!","hint_image"=>"","hint_text"=>"Help Yourself by yourself :P we will give you 5 additional points if you solved this, go on!","hint_penalty"=>0.2,"image"=>"q27.jpg"),
             array("level_id"=>6,"link"=>"https://translate.google.com/#en/ar/This%20Question%20is%20Optional","name"=>"Think Like A Programmer","description"=>"This Question Is OPTIONAL ","hint_image"=>"","hint_text"=>"","hint_penalty"=>null,"image"=>"q28.jpg")
         ));
+=======
+        Question::insert([
+            // Your Questions here..
+        ]);
+>>>>>>> f51df067d73761c5c532bd60fdfbde5838cfeb66
     }
 
 }

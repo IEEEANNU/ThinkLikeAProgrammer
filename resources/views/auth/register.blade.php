@@ -2,7 +2,11 @@
 
     @section('content')
 
+<<<<<<< HEAD:resources/views/auth/register.blade.php
 		<form action="{{url('signup')}}" method="POST">
+=======
+		<form action="{{route('signupPost')}}" method="POST">
+>>>>>>> f51df067d73761c5c532bd60fdfbde5838cfeb66:resources/views/auth/register.blade.php
 			{!! csrf_field() !!}
 			<table class="table" style="width:50%; margin:0 auto">
 				@if(count($errors)>0)

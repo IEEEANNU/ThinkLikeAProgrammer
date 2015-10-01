@@ -11,12 +11,16 @@ class LevelTableSeeder extends Seeder {
         DB::table('levels')->truncate();
 
         Level::insert([
+<<<<<<< HEAD
             ['name' => 'Level 1', 'mark' => 5.0],
             ['name' => 'Level 2', 'mark' => 10.0],
             ['name' => 'Level 3', 'mark' => 15.0],
             ['name' => 'Level 4', 'mark' => 20.0],
             ['name' => 'Level 5', 'mark' => 25.0],
             ['name' => 'Bonus Level', 'mark' => 30.0],
+=======
+            // Your Levels here..
+>>>>>>> f51df067d73761c5c532bd60fdfbde5838cfeb66
         ]);
     }
 
