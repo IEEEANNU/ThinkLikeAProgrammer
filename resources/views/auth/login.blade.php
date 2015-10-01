@@ -19,22 +19,28 @@
 					</tr>
 				@endif
 			</table>
-	    <div class="input-group col-xs-4">
+			<div class="form-group">
+	        <div class="input-group col-xs-12 col-md-4 col-md-offset-4">
 			  <span class="input-group-addon" id="basic-addon1" style="width:140px">Email</span>
 			  <input name="email" type="text" class="form-control" placeholder="e.g.: ex@example.com" aria-describedby="basic-addon1" value="{{old('email')}}">
 			</div>
-			<br>
-			<div class="input-group col-xs-4">
+			</div>
+			<div class="form-group">
+			<div class="input-group col-xs-12 col-md-4 col-md-offset-4">
 			  <span class="input-group-addon" id="basic-addon1" style="width:140px">Password</span>
 			  <input name = "password" type="password" class="form-control" aria-describedby="basic-addon1">
 			</div>
-			<br>
-			<button type="submit" class="col-xs-4 col-xs-offset-4 btn btn-info">Sign in</button>
+			</div>
+			<div class="form-group">
+			<button type="submit" class="col-xs-12 col-md-4 col-md-offset-4 btn btn-info">Sign in</button>
+			</div>
 		</form>
-		<br><br><br>
-		<p class="col-xs-4 col-lg-offset-4">Don't have account? then
-		<a href="{{url('signup')}}">sign up</a>
-    <br/>
+		<br>
+		<div class="row">
+		<p class="col-xs-12 col-md-4 col-md-offset-4">Don't have account? then
+		<a href="{{route('signupGet')}}">sign up</a>
+		</div>
+    <br>
     <br>
     <br>
     @stop
