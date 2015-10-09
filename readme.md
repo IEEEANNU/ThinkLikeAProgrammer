@@ -4,4 +4,4 @@ Think like a programmer is a pseudocode contest based on [Blockly](https://devel
 
 The platform is ready for use, but some more features will follow.
 
-![ThinkLikeAProgrammer](http://tlap.zalsader.koding.io/images/TLAP.jpg)
+![ThinkLikeAProgrammer](https://github.com/zalsader/ThinkLikeAProgrammer/blob/master/public/images/TLAP.jpg)
