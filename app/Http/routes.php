@@ -17,8 +17,7 @@ Route::get('/leaderboard','HomeController@leaderboard');
 Route::get('login', ['as' => 'loginGet', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('login', ['as' => 'loginPost', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('signup', ['as' => 'signupGet', 'uses' => 'Auth\AuthController@getRegister']);
-Route::post('signup', ['as' => 'signupPost', 'uses' => 'Auth\AuthController@postRegister']);
-Route::get('logout', ['as' => 'logoutGet', 'uses' => 'Auth\AuthController@getLogout']);
+Route::post('signup', ['as' => 'signupPost', 'uses' => 'Auth\AuthController@postRegister']); Route::get('logout', ['as' => 'logoutGet', 'uses' => 'Auth\AuthController@getLogout']);
 Route::group(['middleware' => 'auth'], function($router){
     $router->resource('profile','ProfileController');
     Route::group(['as' => 'Submission::', 'prefix' => 'question/{questionId}'], function($r){
@@ -30,6 +29,10 @@ Route::group(['middleware' => 'auth'], function($router){
         $r->post('assess', ['as' => 'assess', 'uses' => 'AssessmentController@assess']);
         $r->get('assessments/', ['as' => 'index', 'uses' => 'AssessmentController@index']);
     });
-    $router->get('question/{questionId}/hint', 'QuestionController@hint');
-    $router->resource('question','QuestionController');
+    Route::group(['as' => 'Question::', 'prefix' => 'question'], function($r){
+        $r->get('create', ['as' => 'create', 'uses' => 'QuestionController@create']);
+        $r->get('show/{id}', ['as' => 'show', 'uses' => 'QuestionController@show']);
+    });
+    //$router->get('question/{questionId}/hint', 'QuestionController@hint');
+    //$router->resource('question','QuestionController');
 });
