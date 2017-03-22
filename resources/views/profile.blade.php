@@ -6,6 +6,7 @@
 
     <div class="col-md-8" >
         <div class="">
+            <a class="btn btn-success" href="{{route('Question::create')}}">Add Question</a>
             @forelse($levels as $level)
             <h3>{{ $level->name }}</h3>
             <div class="table-responsive">
@@ -25,7 +26,7 @@
                     @foreach($level->questions as $question)
                     @if($question->active || \Auth::user()->can('grade', $question))
                       <tr>
-                          <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
+                          <td><a href="{{route('Question::show', [$question->id])}}">{{$question->name}}</a></td>
                           <td>{{round($level->mark,1)}}</td>
                           @can('grade', $level)
                           <td><a class="btn btn-danger" href="{{route('Submission::index', ['questionId' => $question->id])}}">View Submissions</a></td>
@@ -69,7 +70,7 @@
             </div>
             <br>
             @endforeach
-            
+
             <div class=""><hr></div>
             <div class="row">
                 <center><label style="font-size:17px; color:#19a2e4;">You are #<span>{{$myRank}}</span></label></center>

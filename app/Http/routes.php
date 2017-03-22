@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function($router){
     Route::group(['as' => 'Question::', 'prefix' => 'question'], function($r){
         $r->get('create', ['as' => 'create', 'uses' => 'QuestionController@create']);
         $r->get('show/{id}', ['as' => 'show', 'uses' => 'QuestionController@show']);
+        $r->post('store', ['as' => 'store', 'uses' => 'QuestionController@store']);
     });
     //$router->get('question/{questionId}/hint', 'QuestionController@hint');
     //$router->resource('question','QuestionController');

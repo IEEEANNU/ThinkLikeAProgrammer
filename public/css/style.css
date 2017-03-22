@@ -8,3 +8,10 @@
     visibility: none;
     display: none;
 }
+.input-group-addon{
+            min-width: 150px;
+}
+   input[type=checkbox]{
+            margin-left: 20px;
+            margin-top: 8px;
+        }

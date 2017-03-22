@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Question;
 use App\QuestionObservation;
+use App\Level;
 
 class QuestionController extends Controller
 {
@@ -28,6 +29,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
+        $levels=level::all();
+        return view("questions.create",compact(['levels']));
         //
     }
 
@@ -39,6 +42,20 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $question=new Question;
+        $question->level_id=$request->level;
+        $question->name=$request->name;
+        $question->link=$request->link;
+        $question->blocks=$request->blocks;
+        $question->description=$request->description;
+        $question->save();
+        //$question->description=$request->post('description');
+        $imgExtension=$request->file('img')->getClientOriginalExtension();
+        $request->file('img')->move(base_path().'/public/images/questions/',$question->id.'.'.$imgExtension);
+        $question->image=$question->id.'.'.$imgExtension;
+        $question->save();
+
+        return redirect()->route("Question::create");
         //
     }
 
