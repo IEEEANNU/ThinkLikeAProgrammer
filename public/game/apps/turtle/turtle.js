@@ -343,6 +343,9 @@ Turtle.execute = function() {
 
   var code = Blockly.JavaScript.workspaceToCode();
   try {
+      // add by sudqi
+      // to hide turtle at the last move
+      code=code+'Turtle.hideTurtle();'
     eval(code);
   } catch (e) {
     // Null is thrown for infinite loop.
