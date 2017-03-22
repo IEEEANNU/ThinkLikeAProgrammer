@@ -114,7 +114,7 @@
         
         var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
         var blocks = encodeURIComponent(xml.innerHTML);
-        var image = $('.game')[0].contentDocument.getElementById('display').toDataURL('image/png');
+        var image = $('.game')[0].contentDocument.getElementById('display').toDataURL('image/jpeg',1.0);
 
         $.ajax({
             url:'{{url("question/".$question->id."/submit")}}',
