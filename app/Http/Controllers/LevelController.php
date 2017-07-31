@@ -6,40 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Question;
+use App\QuestionObservation;
 use App\Level;
-use App\User;
 
-class ProfileController extends Controller
+class LevelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index() {
-        
-        if(\Auth::user()->cannot('grade', null)) {
-            $levels = Level::where('active', '=', true)->with('questions.submissions')->get();
-            
-        } else {
-            $levels = Level::with('questions.submissions')->get();
-        }
-
-        // Maximum obtainable score from the currently available levels
-        $maxScore = $levels->reduce(function($carry, $item){
-            return $carry + $item->questions->count() * $item->mark;
-        }, 1);
-
-        // For leaderboard.
-        $leaders = User::orderBy('total_score', 'desc')
-            ->get();
-
-        $myRank = 1 + $leaders->search(function($item, $key){
-            return $item->id == \Auth::user()->id;
-        });
-        $myTotalScore = \Auth::user()->total_score;
-        $Admin=User::find(\Auth::user()->id)->isSuperAdmin();
-        return view('profile', compact(['levels', 'leaders', 'myRank', 'myTotalScore', 'maxScore','Admin']));
+    public function index()
+    {
+        //
     }
 
     /**
@@ -49,7 +29,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //return 'create a new user';
+       ;
+        return view("level");
+        //
     }
 
     /**
@@ -60,7 +42,26 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //return 'store the new user to the db';
+        $level=new Level;
+        $level->name=$request->name;
+        $level->mark=$request->mark;
+        $level->active=$request->active=="yes"?1:0;
+        $level->save();
+
+        return view('level');
+        //
+    }
+    public function  activate(Request $request,$levelid){
+       $level=Level::find($levelid) ;
+       $level->active=1;
+       $level->save();
+       return redirect()->back()->withInput();
+    }
+    public function  deactivate(Request $request,$levelid){
+        $level=Level::find($levelid) ;
+        $level->active=0;
+        $level->save();
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -71,7 +72,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-      // return 'go inside the $id (sub)';
+
     }
 
     /**
@@ -82,7 +83,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        // return "you're editing $id (sub)";
+        //
     }
 
     /**
@@ -94,7 +95,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // return "saving the edited $id";
+        //
     }
 
     /**
@@ -105,7 +106,8 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        // return "deleting it";
+        //
     }
+    
 
 }

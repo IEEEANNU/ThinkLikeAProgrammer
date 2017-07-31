@@ -25,7 +25,38 @@ class AssessmentController extends Controller
         $assessments = $submission->assessments;
         return view('assessments.index')->with(compact(['question', 'submission', 'assessments']));
     }
+    public function  upload(Request $request){
+        $this->validate($request,['file'=>'required']);
+        if ($request->file('file')->isValid()) {
+            $file = $request->file;
+            $f = fopen($file->getRealPath(), 'r');
+                while ($line = fgets($f)) {
+                    $a = explode(' ', $line);
+                    $qid = $a[0];
+                    $sid = $a[1];
+                    $uid = $a[2];
+                    $grade = $a[3];
+                    $submission = Submission::find($sid);
+                    if(!$submission)return redirect()->back()->withErrors(['submision id is not found']);
+                    $assessment = new Assessment();
+                    $assessment->submission_id = $sid;
+                    $assessment->grader_id = $uid;
+                    $assessment->grade = $grade;
+                    $assessment->updateFinalGrade();
+                    $submission->updateScore();
+                    $submission->user->updateTotalScore();
+                }
+                fclose($f);
+                return redirect()->route('assessAll');
+            }
+            else
 
+                return redirect()->back()->withErrors(['error with file upload']);
+
+    }
+    public function assessAll(Request $request){
+        return view('upload');
+    }
     /**
      * Store a newly created resource in storage.
      *

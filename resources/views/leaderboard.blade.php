@@ -13,7 +13,7 @@
                             <tr>
                                 <th width="5%">Rank</th>
                                 <th width="30%">Name</th>
-                                <th width="35%">Email</th>
+                               @can('grader',null) <th width="35%">Email</th>@endcan
                                 <th width="30%">Total Score</th>
                             </tr>
                         </thead>
@@ -22,7 +22,9 @@
                             <tr>
                                 <td>{{$i+1}}</td>
                                 <td>{{$user->name}}</td>
+                                @can('grader',null);
                                 <td>{{$user->email}}</td>
+                                @endcan
                                 <td>{{round($user->total_score,5)}}</td>
                             </tr>
                             @endforeach

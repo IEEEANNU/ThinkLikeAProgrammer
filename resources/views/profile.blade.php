@@ -6,9 +6,21 @@
 
     <div class="col-md-8" >
         <div class="">
+            @can('grade',$levels)
             <a class="btn btn-success" href="{{route('Question::create')}}">Add Question</a>
+                <a class="btn btn-success" href="{{URL('level/create')}}">Add Level</a>
+                <a class="btn btn-success" href="{{URL('assessAll')}}"> Assess All</a>
+            @endcan
             @forelse($levels as $level)
-            <h3>{{ $level->name }}</h3>
+                    <h3 sytle="display:inline-block">{{ $level->name }}</h3>
+                @can('grade',null)
+                        @if($level->active)
+                            <a  class="btn btn-primary" href="{{URL('level/deactivate/'.$level->id)}}">Deactivate</a>
+                        @else
+                            <a  class="btn btn-primary" href="{{URL('level/activate/'.$level->id)}}">Activate</a>
+                        @endif
+
+                @endcan
             <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -52,7 +64,6 @@
             @endforelse
         </div>
     </div>
-    @can('grade', null)
     <div class=" col-md-2 well">
         <div class="row">
             <center><label style="font-size:21px; color:#19a2e4;">Leaderboard</label></center>
@@ -87,7 +98,6 @@
             </div>
         </div>
     </div>
-    @endcan
 </div>
 </div>
 @stop

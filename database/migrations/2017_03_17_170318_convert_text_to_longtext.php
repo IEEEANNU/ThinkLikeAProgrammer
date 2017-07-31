@@ -14,9 +14,10 @@ class ConvertTextToLongtext extends Migration
     {
         Schema::table('questions', function (Blueprint $table) {
             //
-            DB::statement('ALTER TABLE questions MODIFY  blocks  LONGTEXT;');
-            DB::statement('ALTER TABLE questions MODIFY  description LONGTEXT;');
-            DB::statement('ALTER TABLE questions MODIFY  hint_text LONGTEXT;');
+            //DB::statement('ALTER TABLE questions MODIFY  blocks  LONGTEXT;');
+            //DB::statement('ALTER TABLE questions MODIFY  description LONGTEXT;');
+            //DB::statement('ALTER TABLE questions MODIFY  hint_text LONGTEXT;');
+            $table->longText('blocks')->change();
         });
     }
 
