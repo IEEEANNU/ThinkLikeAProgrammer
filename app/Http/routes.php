@@ -30,6 +30,18 @@ Route::group(['middleware' => 'auth'], function($router){
         $r->post('assess', ['as' => 'assess', 'uses' => 'AssessmentController@assess']);
         $r->get('assessments/', ['as' => 'index', 'uses' => 'AssessmentController@index']);
     });
-    $router->get('question/{questionId}/hint', 'QuestionController@hint');
-    $router->resource('question','QuestionController');
+    Route::group(['as' => 'Question::', 'prefix' => 'question'], function($r){
+        $r->get('create', ['as' => 'create', 'uses' => 'QuestionController@create']);
+        $r->get('show/{id}', ['as' => 'show', 'uses' => 'QuestionController@show']);
+        $r->post('store', ['as' => 'store', 'uses' => 'QuestionController@store']);
+        $r->get('/{questionId}/hint', 'QuestionController@hint');
+        $r->get('/{questionId}/activate',['as'=>'activate','uses'=> 'QuestionController@activate']);
+        $r->get('/{questionId}/deactivate',['as'=>'deactivate','uses'=> 'QuestionController@deactivate']);
+    });
+    $router->get('level/create', 'LevelController@create');
+    $router->get('assessAll/',['as'=>'assessAll','uses'=> 'AssessmentController@assessAll']);
+    $router->post('upload/', 'AssessmentController@upload');
+    $router->post('level/store', 'LevelController@store');
+    $router->get('level/activate/{levelId}', 'LevelController@activate');
+    $router->get('level/deactivate/{levelId}', 'LevelController@deactivate');
 });

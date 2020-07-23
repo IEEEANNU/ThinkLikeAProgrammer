@@ -20,7 +20,7 @@ class HomeController extends Controller
     }
     
     public function leaderboard() {
-        $this->authorize('grade', null);
+        //$this->authorize('grade', null);
         $users = User::orderBy('total_score', 'desc')->get();
         return view('leaderboard')->with(compact(['users']));
     }

@@ -6,8 +6,21 @@
 
     <div class="col-md-8" >
         <div class="">
+            @can('grade',$levels)
+            <a class="btn btn-success" href="{{route('Question::create')}}">Add Question</a>
+                <a class="btn btn-success" href="{{URL('level/create')}}">Add Level</a>
+                <a class="btn btn-success" href="{{URL('assessAll')}}"> Assess All</a>
+            @endcan
             @forelse($levels as $level)
-            <h3>{{ $level->name }}</h3>
+                    <h3 sytle="display:inline-block">{{ $level->name }}</h3>
+                @can('grade',null)
+                        @if($level->active)
+                            <a  class="btn btn-primary" href="{{URL('level/deactivate/'.$level->id)}}">Deactivate</a>
+                        @else
+                            <a  class="btn btn-primary" href="{{URL('level/activate/'.$level->id)}}">Activate</a>
+                        @endif
+
+                @endcan
             <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -25,7 +38,7 @@
                     @foreach($level->questions as $question)
                     @if($question->active || \Auth::user()->can('grade', $question))
                       <tr>
-                          <td><a href="{{url('question', [$question->id])}}">{{$question->name}}</a></td>
+                          <td><a href="{{route('Question::show', [$question->id])}}">{{$question->name}}</a></td>
                           <td>{{round($level->mark,1)}}</td>
                           @can('grade', $level)
                           <td><a class="btn btn-danger" href="{{route('Submission::index', ['questionId' => $question->id])}}">View Submissions</a></td>
@@ -51,7 +64,6 @@
             @endforelse
         </div>
     </div>
-    @can('grade', null)
     <div class=" col-md-2 well">
         <div class="row">
             <center><label style="font-size:21px; color:#19a2e4;">Leaderboard</label></center>
@@ -69,7 +81,7 @@
             </div>
             <br>
             @endforeach
-            
+
             <div class=""><hr></div>
             <div class="row">
                 <center><label style="font-size:17px; color:#19a2e4;">You are #<span>{{$myRank}}</span></label></center>
@@ -86,7 +98,6 @@
             </div>
         </div>
     </div>
-    @endcan
 </div>
 </div>
 @stop

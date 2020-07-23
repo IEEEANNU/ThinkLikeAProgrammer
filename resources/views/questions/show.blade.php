@@ -21,8 +21,8 @@
         <div class="col-md-6">
             <div width="400" height="400" style="position: relative;">
             <img src="{{asset('images/questions/'.$question->image)}}" alt="">
-            <canvas id="measure" width="400" height="400" 
-            style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+            <canvas  id="measure" width="400" height="400" 
+            style="border: 1px groove gray; position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
             </div>
         </div>
 
@@ -30,10 +30,12 @@
     <div class="row">
         <div class="col-md-2 col-md-offset-8">
             @if(!empty($question->hint_text))
+            <br>
             <button id="hint" class="btn btn-success btn-block">Hint</button>
             @endIf
         </div>
         <div class="col-md-2 pull-right">
+        	<br>
             <button id="submit" class="btn btn-danger btn-block">Submit</button>
         </div>
     </div>
@@ -53,8 +55,9 @@
             @if($observation->hint_used)
                 <div>
                     <p id="hintText">{{$question->hint_text}}</p>
-                    <img id="hintImage" src="{{asset('images/hints/'.$question->hint_image)}}" alt="" 
+                    <img id="hintImage" src="{{asset('images/questions/'.$question->hint_image)}}" alt="" 
                         class="{{empty($question->hint_image)? 'hidden': ''}}">
+                    
                 </div>
             @else
                 <div>
@@ -85,10 +88,13 @@
     </div>
   </div>
 </div>
+
 @stop
 
 @section('scripts')
 <script type="text/javascript">
+
+	
     var hintUsed = {{$observation->hint_used? 'true': 'false'}};
     
     $(function(){
@@ -114,7 +120,7 @@
         
         var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
         var blocks = encodeURIComponent(xml.innerHTML);
-        var image = $('.game')[0].contentDocument.getElementById('display').toDataURL('image/png');
+        var image = $('.game')[0].contentDocument.getElementById('display').toDataURL('image/jpeg',1.0);
 
         $.ajax({
             url:'{{url("question/".$question->id."/submit")}}',
@@ -147,7 +153,7 @@
             success: function(response) {
                 console.log(response);
                 $('#hintModal').find('#hintText').text(response.data.text);
-                $('#hintModal').find('#hintImage')[0].src = ('{{asset("images/hints/")}}/' + response.data.image);
+                $('#hintModal').find('#hintImage')[0].src = ('{{asset("images/questions/")}}/' + response.data.image);
                 $('#hintModal').modal('show');
             }
         });

@@ -153,6 +153,10 @@ Turtle.reset = function() {
 
   // Clear the display.
   Turtle.ctxScratch.canvas.width = Turtle.ctxScratch.canvas.width;
+  // fill the canvas with wihte so can be exported jpeg
+  // add by Sudqi
+  Turtle.ctxScratch.fillStyle = 'white';
+  Turtle.ctxScratch.fillRect(0,0,Turtle.ctxScratch.canvas.width,Turtle.ctxScratch.canvas.width);
   Turtle.ctxScratch.strokeStyle = '#000000';
   Turtle.ctxScratch.fillStyle = '#000000';
   Turtle.ctxScratch.lineWidth = 1;
@@ -339,6 +343,9 @@ Turtle.execute = function() {
 
   var code = Blockly.JavaScript.workspaceToCode();
   try {
+      // add by sudqi
+      // to hide turtle at the last move
+      code=code+'Turtle.hideTurtle();'
     eval(code);
   } catch (e) {
     // Null is thrown for infinite loop.
